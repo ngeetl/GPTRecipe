@@ -3,18 +3,34 @@ import { Input, Button } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
 const UserInput = ({ isLoading, onSubmit }) => {
-  const [foodList, setFoodList] = useState([]);
+  const [foodList, setFoodList] = useState(['']);
   const [buttonOn, setButtonOn] = useState(false);
-  // 사용자의 입력을 받아, 상위 컴포넌트로 데이터를 전달
+  const [role, setRole] = useState('');
+  const [skill, setSkill] = useState('');
+  const [ingredient, setIngredient] = useState([]);
+
+  const onChangeInput = (e) => {
+    if(e.target.name === 'role') {
+      setRole(e.target.value)
+    } else if (e.target.name === 'skill') {
+      setSkill(e.target.value)
+    } 
+  }
 
   // 로딩중 상태일 때 사용자가 제출 버튼을 누르지 못하도록 처리
 
   // 버튼 클릭시 재료 input 추가/삭제
-  const food = <Input placeholder="감자 1개" variant="filled" size='large' style={{fontSize: "1.75rem"}} />
+  useEffect(() => {
+    if(foodList.length > 1) {
+      setButtonOn(true);
+    } else {
+      setButtonOn(false);
+    }
+  }, [foodList]);
 
   const AddButtonClick = () => {
-    setFoodList(prev => [...prev, food])
-  }
+    setFoodList(prev => [...prev, '']);
+  };
 
   const deleteButtonClick = () => {
     setFoodList(prev => {
@@ -22,26 +38,33 @@ const UserInput = ({ isLoading, onSubmit }) => {
       list.pop();
 
       return list
-    })
-  }
+    });
 
-  useEffect(() => {
-    if(foodList.length > 0) {
-      setButtonOn(true);
-    } else {
-      setButtonOn(false);
-    }
-  }, [foodList]);
+    setIngredient(prev => {
+      const list = [...prev];
+      list.pop();
 
+      return list
+    });
+  };
+
+  // 결과 버튼 로직
+  const resultButtonClick = () => {
+    onSubmit(role, skill, ingredient);
+  };
+
+  // antd 스타일
   const fontSize = {fontSize: "1.75rem"}
-
+  const buttonStyle = {width: "fit-content", height: "fit-content", fontSize: "1.3rem", padding: ".8rem 2.3rem"}
 
   return (
     <div className='text-center flex flex-col items-center'>
+
+      {/* Form */}
       <div className='flex items-center text-3xl my-8'>
         <div className='mr-3 w-fit'>나는</div>
         <div className='w-fit'>
-          <Input placeholder="자취생" variant="filled" size='large' style={fontSize} />
+          <Input name='role' placeholder="자취생" variant="filled" size='large' style={fontSize} value={role} onChange={onChangeInput}/>
         </div>
         <div className='ml-3 w-fit'>입니다.</div>
       </div>
@@ -49,20 +72,32 @@ const UserInput = ({ isLoading, onSubmit }) => {
       <div className='flex items-center text-3xl my-8'>
         <div className='mr-3 w-fit'>나의 요리 실력은</div>
         <div className='w-fit'>
-          <Input placeholder="중급" variant="filled" size='large' style={{fontSize: "1.75rem"}} />
+          <Input name='skill' placeholder="중급" variant="filled" size='large' style={fontSize} value={skill} onChange={onChangeInput} />
         </div>
-        <div className='ml-3 w-fit'>입니다.</div>
+        <div className='ml-3 w-fit'>이고,</div>
       </div>
 
       <div className='flex items-center text-3xl my-8'>
         <div className='mr-3 w-fit'>나의 냉장고에는</div>
         <div className='w-fit flex items-center'>
           <div>
-            {food}
             {foodList.map((item, idx) => {
-              return <div className='mt-2' key={idx}>{item}</div>
-            }
-            )}
+              return  <div className='mt-3' key={idx}>
+                <Input 
+                  placeholder={foodList.length > 1 ? "" : "감자 1개"}
+                  variant="filled" 
+                  size='large' 
+                  style={fontSize} 
+                  value={ingredient[idx]}
+                  onChange={(e) => {
+                    const newList = [...ingredient];
+                    newList[idx] = e.target.value
+                    setIngredient(newList)
+                  }}
+                  />
+                </div>
+            })}
+  
           </div>
           <div className='ml-3' onClick={AddButtonClick}><Button type="dashed" size={'large'} icon={<PlusOutlined />} /></div>
           {buttonOn ? <div className='ml-3' onClick={deleteButtonClick}><Button type="dashed" size={'large'} icon={<MinusOutlined />} /></div> : ''}
@@ -70,6 +105,12 @@ const UserInput = ({ isLoading, onSubmit }) => {
         <div className='ml-3 w-fit'>가 있어요.</div>
       </div>
 
+
+      {/* Result */}
+      <div className='my-14'>
+        <Button shape="round" loading={isLoading} onClick={resultButtonClick} style={buttonStyle}>딱 맞는 레시피는?</Button>      
+      </div>      
+      
     </div>
   )
 }

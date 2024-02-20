@@ -11,11 +11,11 @@ function App() {
   const [data, setData] = useState(dummyData);
   const [isLoading, setIsLoading] = useState(false);
 
-  const apiCallHandler = async () => {
+  const apiCallHandler = async (role, skill, ingredient) => {
     try {
       setIsLoading(true);
       const message = await CallGPT({
-        prompt: `나는 자취생이고, 요리 실력은 중급이야. 재료는 감자 2개, 돼지고기 1근, 양파 1개, 계란 4개가 있어.`
+        prompt: `나는 ${role}이고, 요리 실력은 ${skill}이야. 재료는 ${ingredient.map(item => item)} 있어.`
       });
       setData(JSON.parse(message));
 
@@ -27,15 +27,17 @@ function App() {
     }
   };
 
-  const submitHandler = () => {
-
+  const submitHandler = (role, skill, ingredient) => {
+    apiCallHandler(role, skill, ingredient);
   };
+
 
   return (
     <>
       <button onClick={apiCallHandler}>GPT API</button>
       <UserInput isLoading={isLoading} onSubmit={submitHandler} />
-      <div>data: {data.name}</div>
+      <div>data: {data?.name}</div>
+      <div>data: {data?.advice}</div>
       <div>isLoading : {isLoading ? "Loading.." : "fin"}</div>
     </>
   )

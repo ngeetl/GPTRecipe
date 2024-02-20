@@ -12,19 +12,23 @@ export const CallGPT = async ({ prompt }) => {
       2. [recipe] : [name]의 레시피를 순서대로 리스트로 적어줍니다.
       3. [level] : [name]의 레시피의 난이도를 1~10까지 정해줍니다.
       4. [advice] : [name]을 만드는 것에 대한 조언을 적어줍니다.
-      다음 JSON형식을 출력을 이용하십시오:
+      다음 형식과 같이 JSON형식으로 출력을 이용하십시오. 스니펫을 사용하지 않습니다.:
       { 
-          name: here is [name],
-          recipe: here is [recipe],
-          level: here is [level]
-          advice: here is [advice],
+          "name": here is [name],
+          "recipe": here is [recipe],
+          "level": here is [level],
+          "advice": here is [advice],
       }
+    
       
       [request]: `
     },
     {
       role: "user",
-      content: `"""${prompt}"""`
+      content: `
+      """
+      ${prompt}
+      """`,
     },
   ];
 
