@@ -9,15 +9,18 @@ export const CallGPT = async ({ prompt }) => {
     {
       role: "user",
       content: `1. [name] : 하단의 """으로 구분된 [request]을 이해하여 레시피들을 정한 후, 레시피의 이름들을 적어줍니다.
-      2. [recipe] : [name]의 레시피를 순서대로 리스트로 적어줍니다.
-      3. [level] : [name]의 레시피의 난이도를 1~10까지 정해줍니다.
+      2. [recipe] : [name]의 레시피를 순서대로 리스트로 적어줍니다. 존댓말을 사용하며, 자세하게 설명해주어야 합니다. 
+      3. [level] : [name]의 레시피의 난이도를 1~5까지 정해줍니다.
       4. [advice] : [name]을 만드는 것에 대한 조언을 적어줍니다.
+      5. [keyword] : [name]의 맛 표현을 키워드로 2~4개 까지 적어줍니다.
+
       다음 형식과 같이 JSON형식으로 출력을 이용하십시오. 스니펫을 사용하지 않습니다.:
       { 
           "name": here is [name],
           "recipe": here is [recipe],
           "level": here is [level],
           "advice": here is [advice],
+          "keyword: here is [keyword]
       }
     
       
