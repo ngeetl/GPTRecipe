@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 
 const UserInput = ({ isLoading, onSubmit }) => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [foodList, setFoodList] = useState(['']);
   const [buttonOn, setButtonOn] = useState(false);
   const [role, setRole] = useState('');
@@ -50,6 +51,20 @@ const UserInput = ({ isLoading, onSubmit }) => {
 
   // 결과 버튼 로직
   const resultButtonClick = () => {
+    if(!role | !skill | ingredient.length === 0 ) {
+      messageApi.open({
+        type: 'error',
+        content: '빈칸 없이 모두 입력해주세요. 🫨 ',
+      });
+
+      return;
+    }
+
+    messageApi.open({
+      type: 'success',
+      content: '딱 맞는 레시피를 곧 알려드릴게요! 🥰',
+    });
+
     onSubmit(role, skill, ingredient);
   };
 
@@ -58,10 +73,10 @@ const UserInput = ({ isLoading, onSubmit }) => {
   const buttonStyle = {width: "fit-content", height: "fit-content", fontSize: "1.3rem", padding: ".8rem 2.3rem"}
 
   return (
-    <div className='text-center flex flex-col items-center'>
-
+    <div className='text-center flex flex-col items-center gowun-batang-bold'>
+      {contextHolder}
       {/* Form */}
-      <div className='flex items-center text-3xl my-8'>
+      <div className='flex items-center text-4xl my-8'>
         <div className='mr-3 w-fit'>나는</div>
         <div className='w-fit'>
           <Input name='role' placeholder="자취생" variant="filled" size='large' style={fontSize} value={role} onChange={onChangeInput}/>
@@ -69,7 +84,7 @@ const UserInput = ({ isLoading, onSubmit }) => {
         <div className='ml-3 w-fit'>입니다.</div>
       </div>
 
-      <div className='flex items-center text-3xl my-8'>
+      <div className='flex items-center text-4xl my-8'>
         <div className='mr-3 w-fit'>나의 요리 실력은</div>
         <div className='w-fit'>
           <Input name='skill' placeholder="중급" variant="filled" size='large' style={fontSize} value={skill} onChange={onChangeInput} />
@@ -77,7 +92,7 @@ const UserInput = ({ isLoading, onSubmit }) => {
         <div className='ml-3 w-fit'>이고,</div>
       </div>
 
-      <div className='flex items-center text-3xl my-8'>
+      <div className='flex items-center text-4xl my-8'>
         <div className='mr-3 w-fit'>나의 냉장고에는</div>
         <div className='w-fit flex items-center'>
           <div>
