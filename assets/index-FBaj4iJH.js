@@ -56,7 +56,7 @@ Error generating stack: `+i.message+`
       [request]: `},{role:"user",content:`
       """
       ${e}
-      """`}],r=await(await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer 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"},body:JSON.stringify({model:"gpt-3.5-turbo",messages:t,temperature:.7,max_tokens:1e3})})).json();return console.log(">> responseData",r),r.choices[0].message.content};var Xh={exports:{}};/*!
+      """`}],r=await(await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer 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"},body:JSON.stringify({model:"gpt-3.5-turbo",messages:t,temperature:.7,max_tokens:1e3})})).json();return console.log(">> responseData",r),r.choices[0].message.content};var Xh={exports:{}};/*!
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see
 	http://jedwatson.github.io/classnames
