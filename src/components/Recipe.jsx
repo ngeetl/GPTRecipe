@@ -17,8 +17,8 @@ const Recipe = ({ data }) => {
     const recipeList = data.recipe;
 
   return (
-    <div className="mb-16 mt-6">
-      <div className="border min-w-lg rounded overflow-hidden shadow-lg p-10">
+    <div className="mb-16 mt-20 bg-white/85">
+      <div className="min-w-lg rounded overflow-hidden shadow-lg p-10">
         <div className="px-6 py-4">
             <div className="font-bold text-4xl mb-2 pb-2">{data.name}</div>
             <div className="text-gray-700 text-3xl pb-16">{levelLoop()}</div>

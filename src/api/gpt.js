@@ -14,7 +14,7 @@ export const CallGPT = async ({ prompt }) => {
       4. [advice] : [name]을 만드는 것에 대한 조언을 적어줍니다.
       5. [keyword] : [name]의 맛 표현을 키워드로 2~4개 까지 적어줍니다.
 
-      다음 형식과 같이 JSON형식으로만 출력을 이용하십시오. 스니펫은 절대 사용하지 않습니다. 부가적인 표현을 사용하지 않습니다.:
+      다음 형식과 같이 JSON형식으로만 출력을 이용하십시오. 백틱과 스니펫은 절대 사용하지 않습니다.:
       { 
           "name": here is [name],
           "recipe": here is [recipe],

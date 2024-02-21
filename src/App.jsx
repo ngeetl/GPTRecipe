@@ -46,13 +46,13 @@ function App() {
       {contextHolder}
 
       {/* Header */}
-      <div className='text-[41px] font-[900] text-amber-700 mt-3 mb-20'>🍽️🥗🍜🍝🍲 <span className='text-[55px] song-myung-regular'>GPTR</span> 🍗🌭🍟🍕🥨</div>
+      <div className='lg:text-[32px] text-[26px] font-[900] text-amber-900 mb-16'>🍽️🥗🍜🍝🍲 <div className='lg:text-[38px] text-[30px] song-myung-regular mt-3'>오늘 뭐 먹지?</div> 🍗🌭🍟🍕🥨</div>
 
       {/* main */}
       <UserInput isLoading={isLoading} onSubmit={submitHandler} />
       {isError ? <>
       <div className='text-[400px]'>😔</div>
-      <div className='text-[30px] font-gray-600 font-thin'>❌ 레시피를 불러오지 못했습니다. 다시 시도해주세요.</div></> :
+      <div className='text-[30px] font-gray-600 font-thin'>❌ 재료 설정에 문제가 있는 거 같아요. 다시 한번 확인해 주세요!</div></> :
       data && <Recipe data={data}/>
       }
 

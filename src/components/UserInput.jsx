@@ -69,39 +69,39 @@ const UserInput = ({ isLoading, onSubmit }) => {
   };
 
   // antd 스타일
-  const fontSize = {fontSize: "1.75rem"}
-  const buttonStyle = {width: "fit-content", height: "fit-content", fontSize: "1.3rem", padding: ".8rem 2.3rem"}
+  const fontSize = {fontSize: "1.4rem", width: "90%"}
+  const buttonStyle = {width: "fit-content", height: "fit-content", fontSize: "1.2rem", padding: ".8rem 2.3rem"}
 
   return (
-    <div className='text-center flex flex-col items-center gowun-batang-bold'>
+    <div className='text-center flex flex-col items-center m-auto gowun-batang-bold lg:text-3xl text-2xl bg-white/85 rounded-full lg:px-28 lg:py-20 p-5 w-4/5'>
       {contextHolder}
       {/* Form */}
-      <div className='flex items-center text-4xl my-8'>
-        <div className='mr-3 w-fit'>나는</div>
-        <div className='w-fit'>
-          <Input name='role' placeholder="자취생" variant="filled" size='large' style={fontSize} value={role} onChange={onChangeInput}/>
+      <div className='flex lg:flex-row flex-col justify-center items-center my-6'>
+        <div className='mr-3 w-88'>나는</div>
+        <div className='w-fit my-6'>
+          <Input name='role' placeholder="자취생" variant="filled" size='middle' style={fontSize} value={role} onChange={onChangeInput}/>
         </div>
         <div className='ml-3 w-fit'>입니다.</div>
       </div>
 
-      <div className='flex items-center text-4xl my-8'>
+      <div className='flex lg:flex-row flex-col justify-center items-center my-6'>
         <div className='mr-3 w-fit'>나의 요리 실력은</div>
-        <div className='w-fit'>
-          <Input name='skill' placeholder="중급" variant="filled" size='large' style={fontSize} value={skill} onChange={onChangeInput} />
+        <div className='w-fit my-6'>
+          <Input name='skill' placeholder="중급" variant="filled" size='middle' style={fontSize} value={skill} onChange={onChangeInput} />
         </div>
         <div className='ml-3 w-fit'>이고,</div>
       </div>
 
-      <div className='flex items-center text-4xl my-8'>
+      <div className='flex lg:flex-row flex-col justify-center items-center my-6'>
         <div className='mr-3 w-fit'>나의 냉장고에는</div>
-        <div className='w-fit flex items-center'>
+        <div className='w-fit flex items-center my-4'>
           <div>
             {foodList.map((item, idx) => {
               return  <div className='mt-3' key={idx}>
                 <Input 
                   placeholder={foodList.length > 1 ? "" : "감자 1개"}
                   variant="filled" 
-                  size='large' 
+                  size='middle' 
                   style={fontSize} 
                   value={ingredient[idx]}
                   onChange={(e) => {
@@ -114,15 +114,17 @@ const UserInput = ({ isLoading, onSubmit }) => {
             })}
   
           </div>
-          <div className='ml-3' onClick={AddButtonClick}><Button type="dashed" size={'large'} icon={<PlusOutlined />} /></div>
-          {buttonOn ? <div className='ml-3' onClick={deleteButtonClick}><Button type="dashed" size={'large'} icon={<MinusOutlined />} /></div> : ''}
+          <div className='flex lg:flex-row flex-col'>
+            <div className='ml-3' onClick={AddButtonClick}><Button type="dashed" size={'large'} icon={<PlusOutlined />} /></div>
+            {buttonOn ? <div className='ml-3' onClick={deleteButtonClick}><Button type="dashed" size={'large'} icon={<MinusOutlined />} /></div> : ''}
+          </div>
         </div>
         <div className='ml-3 w-fit'>가 있어요.</div>
       </div>
 
 
       {/* Result */}
-      <div className='my-14'>
+      <div className='mt-14'>
         <Button shape="round" loading={isLoading} onClick={resultButtonClick} style={buttonStyle}>딱 맞는 레시피는?</Button>      
       </div>      
       
